@@ -1,4 +1,5 @@
 import galois
+import numpy as np
 
 S_BOX = {0:12, 1:5, 2:6, 3:11, 4:9, 5:0, 6:10, 7:13, 8:3, 9:14, 10:15, 11:8, 12:4, 13:7, 14:1, 15:2}
 S_BOX_INV = {v: k for (k, v) in S_BOX.items()}
@@ -7,6 +8,7 @@ MIX_MATRIX = [[0x4, 0x1, 0x2, 0x2],
               [0x8, 0x6, 0x5, 0x6],
               [0xB, 0xE, 0XA, 0x9],
               [0x2, 0x2, 0xF, 0xB]]
+
 HMAC_KEY_SIZE = 8
 IV_SIZE = 8
 
@@ -14,3 +16,6 @@ SALT_SIZE = 16
 HMAC_SIZE = 32
 
 GF16 = galois.GF(2**4)
+
+MIX_MATRIX_INV = np.linalg.inv(GF16(MIX_MATRIX))
+print(MIX_MATRIX_INV)

@@ -87,7 +87,7 @@ def mix_columns_serial(s):
             s[i][j] = int(ans[i][j])
 
 def inv_mix_columns_serial(s):
-    ans = np.matmul(np.linalg.inv(GF16(MIX_MATRIX)),GF16(s))
+    ans = np.matmul(MIX_MATRIX_INV,GF16(s))
     for i in range(4):
         for j in range(4):
             s[i][j] = int(ans[i][j])

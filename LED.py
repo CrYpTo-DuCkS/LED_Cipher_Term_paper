@@ -275,7 +275,7 @@ class LED:
 
 def encrypt(key, plaintext, mode = 'cbc', workload=100000, key_size=8):
     """
-    Encrypts `plaintext` with `key` using AES-128, an HMAC to verify integrity,
+    Encrypts `plaintext` with `key` using LED, an HMAC to verify integrity,
     and PBKDF2 to stretch the given key.
 
     The exact algorithm is specified in the module docstring.
@@ -296,7 +296,7 @@ def encrypt(key, plaintext, mode = 'cbc', workload=100000, key_size=8):
 
 def decrypt(key, ciphertext, mode = 'cbc', workload=100000, key_size=8):
     """
-    Decrypts `ciphertext` with `key` using AES-128, an HMAC to verify integrity,
+    Decrypts `ciphertext` with `key` using LED, an HMAC to verify integrity,
     and PBKDF2 to stretch the given key.
 
     The exact algorithm is specified in the module docstring.
@@ -306,7 +306,7 @@ def decrypt(key, ciphertext, mode = 'cbc', workload=100000, key_size=8):
 
     assert len(ciphertext) >= 16, """
     Ciphertext must be at least 32 bytes long (16 byte salt + 16 byte block). To
-    encrypt or decrypt single blocks use `AES(key).decrypt_block(ciphertext)`.
+    encrypt or decrypt single blocks use `LED(key).decrypt_block(ciphertext)`.
     """
 
     if isinstance(key, str):
@@ -325,7 +325,7 @@ def decrypt(key, ciphertext, mode = 'cbc', workload=100000, key_size=8):
 # salt = os.urandom(SALT_SIZE)
 # key, hmac_key, iv = get_key_iv(b'DHRUVDESHMUKH\0\0\0', salt, workload)
 # led = LED(key)
-print(decrypt(b'DHRUVDES',encrypt(b'DHRUVDES',b'DHRUVDESHMUKH\0\0\0',mode='e',key_size = 16), mode = 'ctr',key_size = 16))
+print(decrypt(b'DHRUVDES',encrypt(b'DHRUVDES',b'DHRUVDESHMUKH\0\0\0',mode='ctr',key_size = 16), mode = 'ctr',key_size = 16))
 print(encrypt(b'DHRUVDES',b'DHRUVDESHMUKH\0\0\0', mode='ctr',key_size=16))
 
 # print(led.decrypt_block(led.encrypt_block(b'DHRUVDES')))
